@@ -1,0 +1,343 @@
+<!-- <!-- <!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditorium Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="selection-screen" class="form-container">
+            <h1>Welcome!</h1>
+            <button id="showSignIn">Sign In</button>
+            <button id="showRegister">Register</button>
+        </div>
+
+        <div id="signInForm" class="form-container hidden">
+            <form id="signInFormElement">
+                <h1>Sign In</h1>
+                <input type="email" placeholder="Email" required id="signInEmail"/>
+                <input type="password" placeholder="Password" required id="signInPassword"/>
+                <select id="signInDepartment" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="ECE">ECE</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ME">ME</option>
+                    <option value="CE">CE</option>
+                </select>
+                <button type="submit">Sign In</button>
+                <button type="button" id="backToSelection1">Back</button>
+            </form>
+        </div>
+
+        <div id="registerForm" class="form-container hidden">
+            <form id="registerFormElement">
+                <h1>Register</h1>
+                <input type="text" placeholder="Name" required id="registerName"/>
+                <input type="email" placeholder="Email" required id="registerEmail"/>
+                <input type="password" placeholder="Password" required id="registerPassword"/>
+                <select id="registerDepartment" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="ECE">ECE</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ME">ME</option>
+                    <option value="CE">CE</option>
+                </select>
+                <button type="submit">Register</button>
+                <button type="button" id="backToSelection2">Back</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html> -->
+
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form id="signInForm">
+            <h1>Sign In</h1>
+            <label for="signInEmail">Email:</label>
+            <input type="email" id="signInEmail" required>
+            <label for="signInPassword">Password:</label>
+            <input type="password" id="signInPassword" required>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('signInForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+
+            console.log('Sign-in attempt with email:', email);
+
+            try {
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    console.log('Sign-in response data:', data);
+                    alert('Sign-in successful');
+                    localStorage.setItem('userId', data.userId); // Store user ID
+                    localStorage.setItem('department', data.department); // Store department
+                    window.location.href = 'booking.html'; // Redirect to booking page
+                } else {
+                    console.log('Sign-in failed:', data);
+                    alert('Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to sign in');
+            }
+        });
+    </script>
+</body>
+</html>  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth">
+            <form id="registerForm" style="display: none;">
+                <h1>Register</h1>
+                <label for="registerName">Name:</label>
+                <input type="text" id="registerName" required>
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" required>
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" required>
+                <label for="registerDepartment">Department:</label>
+                <input type="text" id="registerDepartment" required>
+                <button type="submit">Register</button>
+                <p>Already have an account? <a href="#" id="toSignIn">Sign in</a></p>
+            </form>
+            <form id="signInForm">
+                <h1>Sign In</h1>
+                <label for="signInEmail">Email:</label>
+                <input type="email" id="signInEmail" required>
+                <label for="signInPassword">Password:</label>
+                <input type="password" id="signInPassword" required>
+                <label for="department">Department</label>
+                <input type="department" id="department" required>
+                
+                <button type="submit">Sign In</button>
+                
+                <p>Don't have an account? <a href="#" id="toRegister">Register</a></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        const registerForm = document.getElementById('registerForm');
+        const signInForm = document.getElementById('signInForm');
+        const toRegister = document.getElementById('toRegister');
+        const toSignIn = document.getElementById('toSignIn');
+
+        toRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            signInForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        toSignIn.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            signInForm.style.display = 'block';
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const department = document.getElementById('registerDepartment').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, department })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Registration successful');
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('department', data.department);
+                    window.location.href = 'booking.html';
+                } else {
+                    alert('Registration failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to register');
+            }
+        });
+
+        signInForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Sign-in successful');
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('department', data.department);
+                    window.location.href = 'booking.html';
+                } else {
+                    alert('Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to sign in');
+            }
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth">
+            <form id="registerForm" style="display: none;">
+                <h1>Register</h1>
+                <label for="registerName">Name:</label>
+                <input type="text" id="registerName" required>
+                <label for="registerEmail">Email:</label>
+                <input type="email" id="registerEmail" required>
+                <label for="registerPassword">Password:</label>
+                <input type="password" id="registerPassword" required>
+                <label for="registerDepartment">Department:</label>
+                <input type="text" id="registerDepartment" required>
+                <button type="submit">Register</button>
+                <p>Already have an account? <a href="#" id="toSignIn">Sign in</a></p>
+            </form>
+            <form id="signInForm">
+                <h1>Sign In</h1>
+                <label for="signInEmail">Email:</label>
+                <input type="email" id="signInEmail" required>
+                <label for="signInPassword">Password:</label>
+                <input type="password" id="signInPassword" required>
+                <label for="department">Department:</label>
+                <input type="text" id="department" required>
+                <button type="submit">Sign In</button>
+                <p>Don't have an account? <a href="#" id="toRegister">Register</a></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        const registerForm = document.getElementById('registerForm');
+        const signInForm = document.getElementById('signInForm');
+        const toRegister = document.getElementById('toRegister');
+        const toSignIn = document.getElementById('toSignIn');
+
+        toRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            signInForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        toSignIn.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            signInForm.style.display = 'block';
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const department = document.getElementById('registerDepartment').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password, department })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Registration successful');
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('department', data.department);
+                    localStorage.setItem('username', data.name);
+                    window.location.href = 'booking.html';
+                } else {
+                    alert('Registration failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to register');
+            }
+        });
+
+        signInForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+            const department = document.getElementById('department').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, department })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Sign-in successful');
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('department', data.department);
+                    localStorage.setItem('username', data.name);
+                    window.location.href = 'booking.html';
+                } else {
+                    alert('Invalid credentials');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to sign in');
+            }
+        });
+    </script>
+</body>
+</html>

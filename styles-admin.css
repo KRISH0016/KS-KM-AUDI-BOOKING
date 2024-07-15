@@ -1,0 +1,107 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+section {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Bookings table styles */
+#bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#bookings-table th, #bookings-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#bookings-table th {
+    background-color: #f2f2f2;
+}
+
+#bookings-table td {
+    vertical-align: top;
+}
+
+#bookings-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#bookings-table tbody tr:hover {
+    background-color: #e2f3ff;
+    cursor: pointer;
+}
+
+/* Calendar section styles */
+#calendar {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Message box styles */
+.message-box {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.message-box.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.message-box.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    
+    section {
+        margin: 10px;
+    }
+}

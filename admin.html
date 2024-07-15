@@ -1,0 +1,77 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Admin Panel</h1>
+            <button id="print-button">Print Bookings</button>
+            <ul id="booking-requests"></ul>
+        </div>
+        <div class="right-panel">
+            <div id="calendar"></div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html> -->
+<!-- admin.html --><!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Panel</title>
+        <!-- FullCalendar library -->
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="styles-admin.css">
+    </head>
+    <body>
+        <header>
+            <h1>Admin Panel</h1>
+        </header>
+        <main>
+            <section class="bookings-section">
+                <h2>Bookings</h2>
+                <table id="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Dept</th>
+                            <th>User ID</th>
+                            <th>Auditorium</th>
+                            <th>Date</th>
+                            <th>Slot</th>
+                            <th>Amenities</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-body">
+                        <!-- Bookings will be dynamically added here -->
+                    </tbody>
+                </table>
+                <div id="message-box" class="message-box"></div>
+            </section>
+            <section class="calendar-section">
+                <h2>Calendar View</h2>
+                <div id="calendar"></div>
+            </section>
+        </main>
+        <script src="admin.js"></script>
+    </body>
+    </html>
+    

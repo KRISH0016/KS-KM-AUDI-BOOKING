@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Auditorium</title>
+    <link rel="stylesheet" href="styles-booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="auditorium-select">
+                <h1>Hello, <span id="userName"></span></h1>
+                <h1>Auditorium Booking</h1>
+                <label for="auditorium">Choose Auditorium:</label>
+                <select id="auditorium">
+                    <option value="auditorium1">KS</option>
+                    <option value="auditorium2">KM</option>
+                </select>
+                <label for="event-name">Event Name:</label>
+                <input type="text" id="event-name" placeholder="Enter event name">
+            </div>
+            <div class="booking-controls">
+                <label for="booking-date">Choose Date:</label>
+                <input type="date" id="booking-date">
+                <label for="slot">Choose Slot:</label>
+                <select id="slot">
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                </select>
+                    <label>Amenities required:</label>
+                    <div>
+                        <input type="checkbox" id="collar-mike" value="Collar Mike">
+                        <label for="collar-mike">Collar Mike</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="three-mikes" value="3 Mikes">
+                        <label for="three-mikes">3 Mikes</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="projector" value="Projector">
+                        <label for="projector">Projector</label>
+                    </div>
+                
+                <button id="book-button">Book</button>
+                <button id="cancel-button">Cancel</button>
+                <div id="message-box"></div>
+            </div>
+        </div>
+        <div class="right-panel">
+            <div id="calendar"></div>
+            <div class="viewMyBookings">
+                <button id="view-my-bookings-button">View My Bookings</button>
+            </div>
+        </div>
+    </div>
+    <script src="booking.js"></script>
+</body>
+</html>
